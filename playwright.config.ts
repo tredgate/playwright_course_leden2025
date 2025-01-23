@@ -22,16 +22,23 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [["html"], ["list"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 25 * 1000,
+  globalTimeout: 1 * 60 * 60 * 3600, // Zobrazení času lépe zde 1 hodina (1 hod. * 60 min. * 60 sec. * 1000 ms) čitelnější než například 3600000
+  expect: {
+    timeout: 10 * 1000,
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
+    ignoreHTTPSErrors: true,
     screenshot: "only-on-failure",
     video: "retain-on-failure",
+    actionTimeout: 1 * 60 * 1000,
   },
 
   /* Configure projects for major browsers */
@@ -53,22 +60,22 @@ export default defineConfig({
 
     /* Test against mobile viewports. */
     // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   name: "Mobile Chrome",
+    //   use: { ...devices["Pixel 5"] },
     // },
     // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
+    //   name: "Mobile Safari",
+    //   use: { ...devices["iPhone 12"] },
     // },
 
     /* Test against branded browsers. */
     // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    //   name: "Microsoft Edge",
+    //   use: { ...devices["Desktop Edge"], channel: "msedge" },
     // },
     // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    //   name: "Google Chrome",
+    //   use: { ...devices["Desktop Chrome"], channel: "chrome" },
     // },
   ],
 

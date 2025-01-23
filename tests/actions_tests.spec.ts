@@ -1,7 +1,7 @@
 //actions_tests.spec.ts
 import { test } from "@playwright/test";
 
-test("Click test", async ({ page }) => {
+test("Click test", { tag: "@gitHubActions" }, async ({ page }) => {
   await page.goto("https://tredgate.com/pmtool");
   await page.locator("#username").fill("playwright_jaro24");
   await page.locator("#password").fill("Playwright!2024");
@@ -23,7 +23,7 @@ test("fill and pressSequentially test", async ({ page }) => {
     .pressSequentially("Kde toto bude?", { delay: 750 }); // Postupné psaní textu s pauzou 750 ms mezi jednotlivými znaky
 });
 
-test("Selects test", async ({ page }) => {
+test("Selects test", { tag: "@gitHubActions" }, async ({ page }) => {
   await page.goto("https://tredgate.com/webtrain/registration.html");
   await page.locator("#gender").selectOption("male"); // výběr pomocí value prvku <option value="male">
   const promiseSelect = page

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["@playwright/test"]
+  },
+  "include": ["tests/**/*"],
+  "exclude": ["node_modules", "playwright-report", "test-results"]
+}
